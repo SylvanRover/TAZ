@@ -4,6 +4,7 @@ using System.Collections;
 
 public class CharacterProfile : MonoBehaviour {
 
+	public int profileID = 0;
 	public int characterID = 0;
 	public int characterMax = 2;
 	public bool playerReady = false;
@@ -18,6 +19,7 @@ public class CharacterProfile : MonoBehaviour {
 	public Color colorTaako;
 	public Color colorMerle;
 	public Color colorDefault;
+	public Text playerNumber;
 
 	private Image charImage;
 
@@ -77,6 +79,13 @@ public class CharacterProfile : MonoBehaviour {
 			} else {				
 				profileBorder.color = colorDefault;
 			}
+		}
+
+		// Player Number
+		if (profileID == 0) {
+			playerNumber.text = "P1";
+		} else {
+			playerNumber.text = "CPU";
 		}
 	}
 

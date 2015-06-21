@@ -184,6 +184,7 @@
      <Compile Include="Assets\Scripts\CharacterProfile.cs" />
      <Compile Include="Assets\Scripts\CharacterSelect.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
      <None Include="Assets\README.txt" />
      <None Include="Assets\Fungus\Narrative\Fonts\Exo2\OFL.txt" />
