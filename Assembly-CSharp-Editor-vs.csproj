@@ -87,6 +87,7 @@
      <None Include="Assets\Fungus\Narrative\Fonts\Exo2\OFL.txt" />
      <None Include="Assets\LICENSE.txt" />
      <None Include="Assets\FungusExamples\Attribution.txt" />
+     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\FungusExamples\TheFacility\Fonts\aleo\SIL Open Font License.txt" />
      <None Include="Assets\FungusExamples\Sherlock\Readme.txt" />
      <None Include="Assets\Fungus\Narrative\Resources\Crossfade.shader" />
