@@ -12,10 +12,28 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 zdepth;
 	private Rigidbody2D rBody2D;
 
+	private string horizontalAxis = "Horizontal_P1";
+	private string verticalAxis = "Vertical_P1";
+	private string joystickA = "A_P1";
+	private string joystickB = "B_P1";
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
 		rBody2D = GetComponent<Rigidbody2D> ();
+
+		if (playerID == 1) {
+			horizontalAxis = "Horizontal_P2";
+			verticalAxis = "Vertical_P2";
+			joystickA = "A_P2";
+			joystickB = "B_P2";
+		}
+		if (playerID == 2) {
+			horizontalAxis = "Horizontal_P3";
+			verticalAxis = "Vertical_P3";
+			joystickA = "A_P3";
+			joystickB = "B_P3";
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,13 +44,11 @@ public class PlayerController : MonoBehaviour {
 		zdepth.z = this.transform.position.y;
 		this.transform.position = zdepth;
 
-		if (playerID != 0) {
-			float moveY = Input.GetAxis ("Vertical");
-			float moveX = Input.GetAxis ("Horizontal");
+		float moveY = Input.GetAxis (verticalAxis);
+		float moveX = Input.GetAxis (horizontalAxis);
 
-			rBody2D.velocity = new Vector2 (moveY * maxSpeed, rBody2D.velocity.y);
-			rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
-		}
+		rBody2D.velocity = new Vector2 (moveY * maxSpeed, rBody2D.velocity.y);
+		rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
 
 		/* Keyboard Controls
 		if (playerID != 0 && !controlsGamepad) {

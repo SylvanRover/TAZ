@@ -12,16 +12,20 @@ public class MainMenu : MonoBehaviour {
 		Application.LoadLevel(levelName);
 	}
 
+	public void MainMenuClose(){
+		mainMenuOpen = false;
+		menuAnim.SetBool("MainMenu", false);
+		charSelectAnim.SetBool("MainMenu", false);
+	}
+	public void MainMenuOpen(){
+		mainMenuOpen = true;
+		menuAnim.SetBool("MainMenu", true);
+		charSelectAnim.SetBool("MainMenu", true);
+	}
+
 	void Update () {
-		if (Input.anyKeyDown && mainMenuOpen) {			
-			mainMenuOpen = false;
-			menuAnim.SetBool("MainMenu", false);
-			charSelectAnim.SetBool("MainMenu", false);
-		}
-		if (Input.GetKeyDown (KeyCode.Escape) && !mainMenuOpen) {			
-			mainMenuOpen = true;
-			menuAnim.SetBool("MainMenu", true);
-			charSelectAnim.SetBool("MainMenu", true);
+		if (Input.GetButton ("Submit") && mainMenuOpen) {			
+			MainMenuClose();
 		}
 	}
 }
