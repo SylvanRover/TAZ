@@ -8,6 +8,24 @@ public class MainMenu : MonoBehaviour {
 	public Animator charSelectAnim;
 	public string levelName;
 
+	public int P1_Character;
+	public int P2_Character;
+	public int P3_Character;
+
+	void Awake(){
+		// Player 1
+		PlayerPrefs.SetInt ("P1 Character", P1_Character);
+		PlayerPrefs.SetFloat ("P1 Health", P1_Character);
+
+		// Player 2
+		PlayerPrefs.SetInt ("P2 Character", P2_Character);
+		PlayerPrefs.SetFloat ("P2 Health", P3_Character);
+
+		// Player 3
+		PlayerPrefs.SetInt ("P3 Character", P2_Character);
+		PlayerPrefs.SetFloat ("P3 Health", P3_Character);
+	}
+
 	public void StartGame (){
 		Application.LoadLevel(levelName);
 	}
@@ -24,7 +42,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetButton ("Submit") && mainMenuOpen) {			
+		if (Input.GetButtonUp ("Submit") && mainMenuOpen) {			
 			MainMenuClose();
 		}
 	}

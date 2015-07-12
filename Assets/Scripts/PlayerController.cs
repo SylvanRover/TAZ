@@ -6,6 +6,12 @@ public class PlayerController : MonoBehaviour {
 	public int playerID = 0;
 	public bool controlsGamepad = false;
 	public float maxSpeed = 0.25f;
+	private SpriteRenderer spriteRenderer;
+	
+	public Sprite characterSprite1;
+	public Sprite characterSprite2;
+	public Sprite characterSprite3;
+
 
 	private bool facingRight = true;
 	private Animator anim;
@@ -21,18 +27,55 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator> ();
 		rBody2D = GetComponent<Rigidbody2D> ();
+		spriteRenderer = GetComponent<SpriteRenderer> ();
 
+		if (playerID == 0) {
+			horizontalAxis = "Horizontal_P1";
+			verticalAxis = "Vertical_P1";
+			joystickA = "A_P1";
+			joystickB = "B_P1";
+			
+			if(PlayerPrefs.GetInt("P1 Character") == 0){
+				spriteRenderer.sprite = characterSprite1;
+			}
+			if(PlayerPrefs.GetInt("P1 Character") == 1){
+				spriteRenderer.sprite = characterSprite2;
+			}
+			if(PlayerPrefs.GetInt("P1 Character") == 2){
+				spriteRenderer.sprite = characterSprite3;
+			}
+		}
 		if (playerID == 1) {
 			horizontalAxis = "Horizontal_P2";
 			verticalAxis = "Vertical_P2";
 			joystickA = "A_P2";
 			joystickB = "B_P2";
+
+			if(PlayerPrefs.GetInt("P2 Character") == 0){
+				spriteRenderer.sprite = characterSprite1;
+			}
+			if(PlayerPrefs.GetInt("P2 Character") == 1){
+				spriteRenderer.sprite = characterSprite2;
+			}
+			if(PlayerPrefs.GetInt("P2 Character") == 2){
+				spriteRenderer.sprite = characterSprite3;
+			}
 		}
 		if (playerID == 2) {
 			horizontalAxis = "Horizontal_P3";
 			verticalAxis = "Vertical_P3";
 			joystickA = "A_P3";
 			joystickB = "B_P3";
+
+			if(PlayerPrefs.GetInt("P3 Character") == 0){
+				spriteRenderer.sprite = characterSprite1;
+			}
+			if(PlayerPrefs.GetInt("P3 Character") == 1){
+				spriteRenderer.sprite = characterSprite2;
+			}
+			if(PlayerPrefs.GetInt("P3 Character") == 2){
+				spriteRenderer.sprite = characterSprite3;
+			}
 		}
 	}
 	
