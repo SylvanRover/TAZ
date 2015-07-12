@@ -40,6 +40,7 @@ public class CharacterProfile : MonoBehaviour {
 		if (!playerReady) {
 			characterID -= 1;
 		}
+
 		// Player 1
 		if (playerID == 0){
 			if (player3.playerReady && characterID == player3.characterID) {
@@ -125,26 +126,47 @@ public class CharacterProfile : MonoBehaviour {
 			if (playerID == 0) {
 				if (characterID == player2.characterID) {
 					player2.CharacterSwitchRight ();
+					if (player2.characterID == player3.characterID){
+						player2.CharacterSwitchRight ();
+					}
 				}
 				if (characterID == player3.characterID) {
 					player3.CharacterSwitchRight ();
+					if (player3.characterID == player2.characterID){
+						player3.CharacterSwitchRight ();
+					}
 				}
+				Debug.LogError(playerID + " is ready");
 			}
 			if (playerID == 1) {
 				if (characterID == player1.characterID) {
 					player1.CharacterSwitchRight ();
+					if (player1.characterID == player3.characterID){
+						player1.CharacterSwitchRight ();
+					}
 				}
 				if (characterID == player3.characterID) {
 					player3.CharacterSwitchRight ();
+					if (player3.characterID == player1.characterID){
+						player3.CharacterSwitchRight ();
+					}
 				}
+				Debug.LogError(playerID + " is ready");
 			}
 			if (playerID == 2) {
 				if (characterID == player2.characterID) {
 					player2.CharacterSwitchRight ();
+					if (player2.characterID == player1.characterID){
+						player2.CharacterSwitchRight ();
+					}
 				}
 				if (characterID == player1.characterID) {
 					player1.CharacterSwitchRight ();
+					if (player1.characterID == player2.characterID){
+						player1.CharacterSwitchRight ();
+					}
 				}
+				Debug.LogError(playerID + " is ready");
 			}
 		}
 	}
@@ -154,6 +176,7 @@ public class CharacterProfile : MonoBehaviour {
 	}
 
 	void Start(){
+
 
 		charImage = GetComponent<Image>();
 
@@ -241,6 +264,12 @@ public class CharacterProfile : MonoBehaviour {
 
 			//Start Game
 			if (!wait && playerReady && Input.GetButtonDown (joystickA)){
+				/*foreach(MainMenu.Player p in mainMenu.playerData){
+					if (!playerReady){
+						PlayerIsReady(true);
+					}
+				}*/
+
 				PlayerPrefs.SetInt ("P1 Character", player1.characterID);
 				PlayerPrefs.SetInt ("P2 Character", player2.characterID);
 				PlayerPrefs.SetInt ("P3 Character", player3.characterID);

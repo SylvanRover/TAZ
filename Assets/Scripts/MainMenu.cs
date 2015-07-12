@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour {
 
@@ -10,7 +11,18 @@ public class MainMenu : MonoBehaviour {
 
 	public int P1_Character;
 	public int P2_Character;
-	public int P3_Character;
+	public int P3_Character;	
+	
+	[System.Serializable]
+	public class Player {
+		public int playerID;
+		public int characterID;
+		public bool playerReady;
+		public float health;
+		public Sprite characterSprite;
+	}
+
+	public List<Player> playerData;
 
 	void Awake(){
 		// Player 1
