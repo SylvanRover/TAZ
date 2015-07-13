@@ -184,6 +184,7 @@
      <Compile Include="Assets\Scripts\ArmyStats.cs" />
      <Compile Include="Assets\Scripts\BroadcastingPosition.cs" />
      <Compile Include="Assets\Scripts\CharacterProfile.cs" />
+     <Compile Include="Assets\Scripts\CharacterProfile1.cs" />
      <Compile Include="Assets\Scripts\CommanderMGMT.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerBroadcast.cs" />
