@@ -23,6 +23,17 @@ public class PlayerController : MonoBehaviour {
 	private string joystickA = "A_P1";
 	private string joystickB = "B_P1";
 
+	void Flip()
+	{
+		// Switch the way the player is labelled as facing
+		facingRight = !facingRight;
+		
+		// Multiply the player's x local scale by -1
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -77,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 				spriteRenderer.sprite = characterSprite3;
 			}
 		}
+
+
 	}
 	
 	// Update is called once per frame
@@ -92,6 +105,14 @@ public class PlayerController : MonoBehaviour {
 
 		rBody2D.velocity = new Vector2 (moveY * maxSpeed, rBody2D.velocity.y);
 		rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
+		
+		// Flip Sprite dependent on Velocity
+		float someScale = transform.localScale.x;
+		if (moveX > 0 && !facingRight) {
+			Flip ();            
+		} else if (moveX < 0 && facingRight){
+			Flip (); 
+		}
 
 		/* Keyboard Controls
 		if (playerID != 0 && !controlsGamepad) {

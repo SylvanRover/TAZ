@@ -189,20 +189,32 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerBroadcast.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
+     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\README.txt" />
+     <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Fungus\Narrative\Fonts\Exo2\OFL.txt" />
      <None Include="Assets\LICENSE.txt" />
      <None Include="Assets\FungusExamples\Attribution.txt" />
      <None Include="Assets\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\FungusExamples\TheFacility\Fonts\aleo\SIL Open Font License.txt" />
      <None Include="Assets\FungusExamples\Sherlock\Readme.txt" />
+     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
      <None Include="Assets\Fungus\Narrative\Resources\Crossfade.shader" />
      <None Include="Assets\Fungus\Narrative\Fonts\Amaranth\SIL Open Font License.txt" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\README.txt" />
      <None Include="Assets\FungusExamples\FungusTown\Readme.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\Level_001.tiled2unity.xml" />
      <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\LICENSE.txt" />
      <None Include="Assets\Fungus\Narrative\Images\Attribution.txt" />
+     <None Include="Assets\Tiled2Unity\License.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
