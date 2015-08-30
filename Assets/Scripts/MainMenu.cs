@@ -38,8 +38,13 @@ public class MainMenu : MonoBehaviour {
 		PlayerPrefs.SetFloat ("P3 Health", P3_Character);
 	}
 
-	public void StartGame (){
+	IEnumerator FadeToStart() {
+		yield return new WaitForSeconds(1);
 		Application.LoadLevel(levelName);
+	}
+
+	public void StartGame (){
+		StartCoroutine(FadeToStart());
 	}
 
 	public void MainMenuClose(){
@@ -54,8 +59,40 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetButtonUp ("Submit") && mainMenuOpen) {			
+		/*if (Input.GetButtonUp("Submit") && mainMenuOpen) {			
 			MainMenuClose();
+		}*/
+
+		//Touch myTouch = Input.GetTouch(0);
+		
+		//Touch[] myTouches = Input.touches;
+		for (var i = 0; i < Input.touchCount; ++i) {
+			if (Input.GetTouch(i).phase == TouchPhase.Began)
+			if (mainMenuOpen) {
+				MainMenuClose();
+				StartGame();
+			}
+		}
+
+		if (Input.GetMouseButtonDown (0) || Input.GetButtonUp ("Submit")) {
+			if (mainMenuOpen) {
+				MainMenuClose();
+				StartGame();
+			}
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour {
 	private string joystickA = "A_P1";
 	private string joystickB = "B_P1";
 
+	public Transform target;
+	public float speed;
+
 	void Flip()
 	{
 		// Switch the way the player is labelled as facing
@@ -100,11 +103,32 @@ public class PlayerController : MonoBehaviour {
 		zdepth.z = this.transform.position.y;
 		this.transform.position = zdepth;
 
+		// Gamepad Controls
 		float moveY = Input.GetAxis (verticalAxis);
 		float moveX = Input.GetAxis (horizontalAxis);
 
-		rBody2D.velocity = new Vector2 (moveY * maxSpeed, rBody2D.velocity.y);
-		rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
+		if (controlsGamepad) {
+			rBody2D.velocity = new Vector2 (moveY * maxSpeed, rBody2D.velocity.y);
+			rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
+		}
+
+		// Touch and Mouse Controls
+		if(Input.touchCount > 0  && Input.GetTouch (0).phase == TouchPhase.Began) {
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			
+			if(Physics.Raycast(ray,out hit)) {
+				if(hit.collider != null) {					
+					float step = speed * Time.deltaTime;
+					transform.position = Vector3.MoveTowards (transform.position, target.position, step);
+				}
+			}
+		}
+
+		/*if (!controlsGamepad) {
+			float step = speed * Time.deltaTime;
+			transform.position = Vector3.MoveTowards (transform.position, target.position, step);
+		}*/
 		
 		// Flip Sprite dependent on Velocity
 		float someScale = transform.localScale.x;
