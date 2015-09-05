@@ -183,6 +183,7 @@
      <Compile Include="Assets\Fungus\iTween\Scripts\Commands\iTweenCommand.cs" />
      <Compile Include="Assets\Scripts\ArmyStats.cs" />
      <Compile Include="Assets\Scripts\BroadcastingPosition.cs" />
+     <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CharacterProfile.cs" />
      <Compile Include="Assets\Scripts\CharacterProfile1.cs" />
      <Compile Include="Assets\Scripts\CommanderMGMT.cs" />

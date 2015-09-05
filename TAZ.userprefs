@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="41" Column="29" />
+      <File FileName="Assets\Scripts\MainMenu.cs" Line="23" Column="3" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="128" Column="7" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="4" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

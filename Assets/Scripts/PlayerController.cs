@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
 	public int playerID = 0;
 	public bool controlsGamepad = false;
+	public bool controlsTouch = true;
+	public bool controlsMouse = true;
 	public float maxSpeed = 0.25f;
 	private SpriteRenderer spriteRenderer;
 	
 	public Sprite characterSprite1;
 	public Sprite characterSprite2;
 	public Sprite characterSprite3;
-
 
 	private bool facingRight = true;
 	private Animator anim;
@@ -23,8 +24,8 @@ public class PlayerController : MonoBehaviour {
 	private string joystickA = "A_P1";
 	private string joystickB = "B_P1";
 
-	public Transform target;
-	public float speed;
+	public float speed;	
+	private Vector3 target;
 
 	void Flip()
 	{
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		anim = GetComponent<Animator> ();
 		rBody2D = GetComponent<Rigidbody2D> ();
-		spriteRenderer = GetComponent<SpriteRenderer> ();
+		spriteRenderer = GetComponent<SpriteRenderer> ();		
+		target = transform.position;
 
 		if (playerID == 0) {
 			horizontalAxis = "Horizontal_P1";
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 			joystickA = "A_P3";
 			joystickB = "B_P3";
 
-			if(PlayerPrefs.GetInt("P3 Character") == 0){
+			/*if(PlayerPrefs.GetInt("P3 Character") == 0){
 				spriteRenderer.sprite = characterSprite1;
 			}
 			if(PlayerPrefs.GetInt("P3 Character") == 1){
@@ -89,14 +91,14 @@ public class PlayerController : MonoBehaviour {
 			}
 			if(PlayerPrefs.GetInt("P3 Character") == 2){
 				spriteRenderer.sprite = characterSprite3;
-			}
+			}*/
 		}
 
 
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
 		// Iso Depth		
 		zdepth = this.transform.position;
@@ -112,56 +114,30 @@ public class PlayerController : MonoBehaviour {
 			rBody2D.velocity = new Vector2 (moveX * maxSpeed, rBody2D.velocity.x);
 		}
 
-		// Touch and Mouse Controls
-		if(Input.touchCount > 0  && Input.GetTouch (0).phase == TouchPhase.Began) {
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-			
-			if(Physics.Raycast(ray,out hit)) {
-				if(hit.collider != null) {					
-					float step = speed * Time.deltaTime;
-					transform.position = Vector3.MoveTowards (transform.position, target.position, step);
-				}
+		// Touch Controls
+		if (playerID == 0) {
+			if (controlsTouch && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began || Input.GetMouseButtonDown (0)) {
+				//Debug.LogError ("Clicked on Position with mouse" + target);
+				target = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+				target.z = transform.position.z;
 			}
+			transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
+
+			// Mouse Controls
+			if (controlsMouse && Input.GetMouseButton (0)) {
+				//Debug.LogError ("Clicked on Position with mouse" + target);
+				target = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				target.z = transform.position.z;
+			}
+			transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
 		}
 
-		/*if (!controlsGamepad) {
-			float step = speed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards (transform.position, target.position, step);
-		}*/
-		
-		// Flip Sprite dependent on Velocity
+		// Flip sprite
 		float someScale = transform.localScale.x;
 		if (moveX > 0 && !facingRight) {
 			Flip ();            
 		} else if (moveX < 0 && facingRight){
 			Flip (); 
-		}
-
-		/* Keyboard Controls
-		if (playerID != 0 && !controlsGamepad) {
-			if (Input.GetKey(KeyCode.UpArrow)){
-				Vector3 position = this.transform.position;
-				position.y += speed;
-				this.transform.position = position;
-			}
-			if (Input.GetKey(KeyCode.LeftArrow)){				
-				Vector3 position = this.transform.position;
-				position.x -= speed;
-				this.transform.position = position;
-
-			}
-			if (Input.GetKey(KeyCode.DownArrow)){
-				Vector3 position = this.transform.position;
-				position.y -= speed;
-				this.transform.position = position;
-			}
-			if (Input.GetKey(KeyCode.RightArrow)){
-				Vector3 position = this.transform.position;
-				position.x += speed;
-				this.transform.position = position;
-			}
-		}*/
-	
+		}	
 	}
 }
