@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour {
 	public float followDistance;
 	public GameObject target;
 	public Vector3 offset;
+	public float buffer = 0.1f;
 	Vector3 targetPos;
 	// Use this for initialization
 	void Start () {

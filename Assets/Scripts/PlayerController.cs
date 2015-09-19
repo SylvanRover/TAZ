@@ -27,8 +27,14 @@ public class PlayerController : MonoBehaviour {
 	public float speed;	
 	private Vector3 target;
 
-	void Flip()
-	{
+	private int direction;
+	private float _posX;
+
+	private Vector3 startPos;
+	private Vector3 endPos;
+	public float buffer = 1f;
+
+    void Flip() {
 		// Switch the way the player is labelled as facing
 		facingRight = !facingRight;
 		
@@ -38,12 +44,15 @@ public class PlayerController : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		anim = GetComponent<Animator> ();
 		rBody2D = GetComponent<Rigidbody2D> ();
 		spriteRenderer = GetComponent<SpriteRenderer> ();		
 		target = transform.position;
+
+		direction = 1;
+		_posX = transform.position.x;
 
 		if (playerID == 0) {
 			horizontalAxis = "Horizontal_P1";
@@ -116,28 +125,47 @@ public class PlayerController : MonoBehaviour {
 
 		// Touch Controls
 		if (playerID == 0) {
-			if (controlsTouch && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began || Input.GetMouseButtonDown (0)) {
-				//Debug.LogError ("Clicked on Position with mouse" + target);
-				target = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
-				target.z = transform.position.z;
+			if (controlsTouch){
+				if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began || Input.GetMouseButtonDown (0)) {
+					//Debug.LogError ("Clicked on Position with mouse" + target);
+					target = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+					target.z = transform.position.z;
+				}
+				transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
 			}
-			transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
-
-			// Mouse Controls
-			if (controlsMouse && Input.GetMouseButton (0)) {
-				//Debug.LogError ("Clicked on Position with mouse" + target);
-				target = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				target.z = transform.position.z;
-			}
-			transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
-		}
+			if (controlsMouse){
+				// Mouse Controls
+				startPos = transform.position;
+				if (Input.GetMouseButton (0)) {
+					//Debug.LogError ("Clicked on Position with mouse" + target);
+					target = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+					target.z = transform.position.z;
+				}
+				transform.position = Vector3.MoveTowards (transform.position, target, speed * Time.deltaTime);
+                /*endPos = target;
+				if ( Mathf.Abs(startPos.x - endPos.x) <= buffer){
+					target = transform.position;
+				}*/
+            }
+        }
 
 		// Flip sprite
-		float someScale = transform.localScale.x;
-		if (moveX > 0 && !facingRight) {
-			Flip ();            
-		} else if (moveX < 0 && facingRight){
-			Flip (); 
-		}	
+		if (controlsMouse || controlsTouch) {
+			if (transform.position.x > _posX && !facingRight) {
+                Flip();
+            } else if (transform.position.x < _posX && facingRight) {
+                Flip();
+            }		
+			_posX = transform.position.x;
+		}
+
+		if (controlsGamepad) {
+			float someScale = transform.localScale.x;
+			if (moveX > 0 && !facingRight) {
+				Flip ();            
+			} else if (moveX < 0 && facingRight) {
+				Flip (); 
+			}
+		}
 	}
 }
